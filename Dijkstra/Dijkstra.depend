@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1521362437 source:/home/mirsahib/Desktop/Dijkstra/main.cpp
+	<iostream>
+	<dijkstra.h>
+
+1521362546 source:/home/mirsahib/Desktop/Dijkstra/dijkstra.cpp
+	<iostream>
+	<cmath>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	"node.h"
+	"dijkstra.h"
+
+1521362327 /home/mirsahib/Desktop/Dijkstra/dijkstra.h
+	"node.h"
+
+1521362257 source:/home/mirsahib/Desktop/Dijkstra/node.cpp
+	<iostream>
+	"node.h"
+
+1521362092 /home/mirsahib/Desktop/Dijkstra/node.h
+
+1521379489 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/main.cpp
+	<iostream>
+	<dijkstra.h>
+
+1521362257 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/node.cpp
+	<iostream>
+	"node.h"
+
+1521362092 /home/mirsahib/Desktop/Project_Mercury/Dijkstra/node.h
+
+1521379401 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/dijkstra.cpp
+	<iostream>
+	<cmath>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	<queue>
+	"node.h"
+	"dijkstra.h"
+
+1521378623 /home/mirsahib/Desktop/Project_Mercury/Dijkstra/dijkstra.h
+	"node.h"
+
