@@ -14,6 +14,8 @@ private:
     void initialize_matrix();
     void initialize_node();
     int no_of_connection();
+    void relax_edge(int u,int v);//relax_edge(source,destination)
+    bool isConnected();
 
 public:
     Dijkstra();

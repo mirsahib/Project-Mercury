@@ -4,7 +4,7 @@
 using namespace std;
 
 node::node(){
-    this->cost = 0;
+    this->cost = -1;
     this->predecessor =-1;
     this->visited = false;
 }
@@ -13,6 +13,9 @@ int node::getCost(){
 }
 int node::getPredecessor(){
     return this->predecessor;
+}
+int node::getId(){
+    return this->id;
 }
 bool node::isVisited(){
     return this->visited;
@@ -25,4 +28,10 @@ void node::setPredecessor(int p){
 }
 void node::setVisited(bool v){
     this->visited = v;
+}
+void node::setId(int i){
+    this->id = i;
+}
+int comparable::operator()(node &a,node &b){
+    return a.getCost()>b.getCost();
 }
