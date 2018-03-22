@@ -102,17 +102,19 @@ bool Dijkstra::isConnected(){
 
     return counter;//return true if source is connected with destination
 }
-void Dijkstra::relax_edge(int u,int v){
+void Dijkstra::relax_edge(int u,int v,priority_queue<node,vector<node>,comparable>& pq){
     int parent_cost = node_array[u].getCost();
     int child_cost = node_array[v].getCost();
     int parent_to_child = matrix[u][v];
     if(node_array[v].getCost()==-1){
         node_array[v].setCost(parent_cost+parent_to_child);
         node_array[v].setPredecessor(u);
+        pq.push(node_array[v]);
     }else{
         if(child_cost>parent_cost+parent_to_child){
             node_array[v].setCost(parent_cost+parent_to_child);
             node_array[v].setPredecessor(u);
+            pq.push(node_array[v]);
         }
     }
 }
@@ -120,8 +122,8 @@ void Dijkstra::relax_edge(int u,int v){
 //public function
 void Dijkstra::dijkstraPath(){
     if(isConnected()){
-        priority_queue<node,vector<node>,comparable>pq;
         int temp = source;
+        priority_queue<node,vector<node>,comparable>pq;
         node current;
         if(!node_array[temp].isVisited()){
             node_array[temp].setCost(0);
@@ -133,8 +135,7 @@ void Dijkstra::dijkstraPath(){
             for(int j=0;j<vertex;j++){
                 if(matrix[temp][j]!=-1 && matrix[temp][j]!=0){
                     if(!node_array[j].isVisited()){
-                        relax_edge(temp,j);
-                        pq.push(node_array[j]);
+                        relax_edge(temp,j,pq);
                     }
                 }
             }
@@ -147,7 +148,15 @@ void Dijkstra::dijkstraPath(){
         cout<<"source is not connected"<<endl;
     }
 }
-
+void Dijkstra::showPath(){
+    int temp = destination;
+    cout<<"Path distance: "<<node_array[temp].getCost()<<endl;
+    while(temp!=source){
+        cout<<temp<<"->";
+        temp=node_array[temp].getPredecessor();
+    }
+    cout<<temp;
+}
 void Dijkstra::display_matrix(){
     for(int i=0;i<vertex;i++){
         for(int j=0;j<vertex;j++){
@@ -160,6 +169,7 @@ void Dijkstra::display_matrix(){
 void Dijkstra::display_node(){
     for(int i=0;i<vertex;i++){
         cout<<"Node cost "<<node_array[i].getCost();
+        cout<<",Node ID "<<node_array[i].getId();
         cout<<",Node predecessor "<<node_array[i].getPredecessor();
         cout<<",Node status "<<node_array[i].isVisited()<<endl;
     }

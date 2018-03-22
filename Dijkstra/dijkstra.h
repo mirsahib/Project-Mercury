@@ -1,6 +1,9 @@
 #ifndef _Dijkstra_H
 #define _Dijkstra
+#include <queue>
 #include "node.h"
+
+using namespace std;
 
 class Dijkstra{
 private:
@@ -14,7 +17,7 @@ private:
     void initialize_matrix();
     void initialize_node();
     int no_of_connection();
-    void relax_edge(int u,int v);//relax_edge(source,destination)
+    void relax_edge(int u,int v,priority_queue<node,vector<node>,comparable>& pq);//relax_edge(source,destination)
     bool isConnected();
 
 public:
