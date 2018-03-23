@@ -4,6 +4,7 @@
 #include <ctime>
 #include <iomanip>
 #include <queue>
+#include <stack>
 #include <vector>
 #include "node.h"
 #include "dijkstra.h"
@@ -58,15 +59,16 @@ void Dijkstra::initialize_matrix(){
 void Dijkstra::initialize_node(){
     this->node_array = new node[vertex];//creating node array
     for(int i=0;i<vertex;i++){
-        node_array[i].setId(i);
+        node_array[i].setId(i);//setting an id for the node
     }
 }
-
+//calculate the number of connection for the given percentage
 int Dijkstra::no_of_connection(){
     float percent = connect_per/100;
-    int node = (vertex*(vertex-1))/2;
+    int node = (vertex*(vertex-1))/2;// n(n-1)/2 formula for fully connected graph
     return node*percent;
 }
+//this is a dry run to check if source is connected with the destination
 bool Dijkstra::isConnected(){
     queue<int>bfs;
     int counter = 0;
@@ -106,14 +108,14 @@ void Dijkstra::relax_edge(int u,int v,priority_queue<node,vector<node>,comparabl
     int parent_cost = node_array[u].getCost();
     int child_cost = node_array[v].getCost();
     int parent_to_child = matrix[u][v];
-    if(node_array[v].getCost()==-1){
+    if(node_array[v].getCost()==-1){//check if child node has any cost
         node_array[v].setCost(parent_cost+parent_to_child);
-        node_array[v].setPredecessor(u);
+        node_array[v].setPredecessor(u);//replace child node cost to new cost
         pq.push(node_array[v]);
     }else{
-        if(child_cost>parent_cost+parent_to_child){
+        if(child_cost>parent_cost+parent_to_child){//if child node cost is more than parent node cost + parent to child node cost
             node_array[v].setCost(parent_cost+parent_to_child);
-            node_array[v].setPredecessor(u);
+            node_array[v].setPredecessor(u);//update child node cost
             pq.push(node_array[v]);
         }
     }
@@ -129,20 +131,20 @@ void Dijkstra::dijkstraPath(){
             node_array[temp].setCost(0);
             node_array[temp].setPredecessor(temp);
             node_array[temp].setVisited(true);
-            pq.push(node_array[temp]);
+            pq.push(node_array[temp]);//load initial source to the priority queue
         }
         while(!pq.empty()){
             for(int j=0;j<vertex;j++){
-                if(matrix[temp][j]!=-1 && matrix[temp][j]!=0){
-                    if(!node_array[j].isVisited()){
-                        relax_edge(temp,j,pq);
+                if(matrix[temp][j]!=-1 && matrix[temp][j]!=0){//check if node is self connected or disconnected
+                    if(!node_array[j].isVisited()){//check whether the node is visited
+                        relax_edge(temp,j,pq);//check if minimum weighted edge is found
                     }
                 }
             }
-            pq.pop();
-            current = pq.top();
-            temp = current.getId();
-            node_array[temp].setVisited(true);
+            pq.pop();//remove the explored node
+            current = pq.top();//load new node which has minimum cost
+            temp = current.getId();//get new node id
+            node_array[temp].setVisited(true);//mark the new explore node as visited
         }
     }else{
         cout<<"source is not connected"<<endl;
@@ -150,12 +152,21 @@ void Dijkstra::dijkstraPath(){
 }
 void Dijkstra::showPath(){
     int temp = destination;
+    stack <int> path;
     cout<<"Path distance: "<<node_array[temp].getCost()<<endl;
     while(temp!=source){
-        cout<<temp<<"->";
+        path.push(temp);//store path info into a stack
         temp=node_array[temp].getPredecessor();
     }
-    cout<<temp;
+    path.push(temp);//
+    while(!path.empty()){
+        if(path.top()==destination){
+            cout<<path.top();
+        }else{
+            cout<<path.top()<<"->";
+        }
+        path.pop();
+    }
 }
 void Dijkstra::display_matrix(){
     for(int i=0;i<vertex;i++){

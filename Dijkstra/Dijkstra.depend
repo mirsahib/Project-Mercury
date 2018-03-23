@@ -21,7 +21,7 @@
 
 1521362092 /home/mirsahib/Desktop/Dijkstra/node.h
 
-1521733362 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/main.cpp
+1521791912 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/main.cpp
 	<iostream>
 	<dijkstra.h>
 
@@ -31,13 +31,14 @@
 
 1521648168 /home/mirsahib/Desktop/Project_Mercury/Dijkstra/node.h
 
-1521733787 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/dijkstra.cpp
+1521808958 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/dijkstra.cpp
 	<iostream>
 	<cmath>
 	<cstdlib>
 	<ctime>
 	<iomanip>
 	<queue>
+	<stack>
 	<vector>
 	"node.h"
 	"dijkstra.h"
