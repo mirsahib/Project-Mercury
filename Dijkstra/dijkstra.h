@@ -13,7 +13,9 @@ private:
     int destination;
     int** matrix;
     node* node_array;
+    int connected;
 
+    void setConnected(int c);
     void initialize_matrix();
     void initialize_node();
     int no_of_connection();

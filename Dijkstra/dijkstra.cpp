@@ -18,7 +18,7 @@ Dijkstra::Dijkstra(int v,float per_of_con,int s,int d){
     this->source = s;//source initialize
     this->destination = d;//destination initialize
     this->matrix = new int*[vertex];// create 1d matrix
-
+    this->connected = 0;
 
     for(int i=0;i<vertex;i++){
         this->matrix[i] = new int[vertex];//create 2d matrix
@@ -68,42 +68,7 @@ int Dijkstra::no_of_connection(){
     int node = (vertex*(vertex-1))/2;// n(n-1)/2 formula for fully connected graph
     return node*percent;
 }
-//this is a dry run to check if source is connected with the destination
-bool Dijkstra::isConnected(){
-    queue<int>bfs;
-    int counter = 0;
-    int temp = source;
-    //mark the source node visited and insert the source to bfs queue
-    if(!node_array[temp].isVisited()){
-        bfs.push(temp);
-        node_array[temp].setVisited(true);
-    }
 
-    while(!bfs.empty()){
-        //check if destination is connected with the source
-        if(temp==destination){
-            counter=1;
-            break;//if destination is found break the loop
-        }
-        //traversing the graph
-        for(int j=0;j<vertex;j++){
-            if(matrix[temp][j]!=0 && matrix[temp][j]!=-1){
-                if(!node_array[j].isVisited()){
-                    bfs.push(j);
-                    node_array[j].setVisited(true);
-                }
-            }
-        }
-        bfs.pop();//remove the parent node
-        temp = bfs.front();//source changes to next child node
-    }
-    //reinitializing node array
-    for(int i=0;i<vertex;i++){
-        node_array[i].setVisited(false);
-    }
-
-    return counter;//return true if source is connected with destination
-}
 void Dijkstra::relax_edge(int u,int v,priority_queue<node,vector<node>,comparable>& pq){
     int parent_cost = node_array[u].getCost();
     int child_cost = node_array[v].getCost();
@@ -116,14 +81,20 @@ void Dijkstra::relax_edge(int u,int v,priority_queue<node,vector<node>,comparabl
         if(child_cost>parent_cost+parent_to_child){//if child node cost is more than parent node cost + parent to child node cost
             node_array[v].setCost(parent_cost+parent_to_child);
             node_array[v].setPredecessor(u);//update child node cost
-            pq.push(node_array[v]);
+            pq.push(node_array[v]);//duplicate should be deleted otherwise there will be a redundant node
         }
     }
 }
+void Dijkstra::setConnected(int c){
+    connected = c;
+}
+bool Dijkstra::isConnected(){
+    return connected;
+}
+
 
 //public function
 void Dijkstra::dijkstraPath(){
-    if(isConnected()){
         int temp = source;
         priority_queue<node,vector<node>,comparable>pq;
         node current;
@@ -134,6 +105,10 @@ void Dijkstra::dijkstraPath(){
             pq.push(node_array[temp]);//load initial source to the priority queue
         }
         while(!pq.empty()){
+            if(temp==destination){
+                setConnected(1);
+            }
+
             for(int j=0;j<vertex;j++){
                 if(matrix[temp][j]!=-1 && matrix[temp][j]!=0){//check if node is self connected or disconnected
                     if(!node_array[j].isVisited()){//check whether the node is visited
@@ -146,26 +121,28 @@ void Dijkstra::dijkstraPath(){
             temp = current.getId();//get new node id
             node_array[temp].setVisited(true);//mark the new explore node as visited
         }
-    }else{
-        cout<<"source is not connected"<<endl;
+    if(!isConnected()){
+        cout<<"graph is not connected"<<endl;
     }
 }
 void Dijkstra::showPath(){
-    int temp = destination;
-    stack <int> path;
-    cout<<"Path distance: "<<node_array[temp].getCost()<<endl;
-    while(temp!=source){
-        path.push(temp);//store path info into a stack
-        temp=node_array[temp].getPredecessor();
-    }
-    path.push(temp);//
-    while(!path.empty()){
-        if(path.top()==destination){
-            cout<<path.top();
-        }else{
-            cout<<path.top()<<"->";
+    if(isConnected()){
+        int temp = destination;
+        stack <int> path;
+        cout<<"Path distance: "<<node_array[temp].getCost()<<endl;
+        while(temp!=source){
+            path.push(temp);//store path info into a stack
+            temp=node_array[temp].getPredecessor();
         }
-        path.pop();
+        path.push(temp);//
+        while(!path.empty()){
+            if(path.top()==destination){
+                cout<<path.top();
+            }else{
+                cout<<path.top()<<"->";
+            }
+            path.pop();
+        }
     }
 }
 void Dijkstra::display_matrix(){
