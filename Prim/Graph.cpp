@@ -1,23 +1,23 @@
 #include <iostream>
-#include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include <iomanip>
-#include <stack>
+#include "Edge.h"
 #include "PriorityQueue.h"
 #include "node.h"
-#include "dijkstra.h"
+#include "Graph.h"
 
 using namespace std;
 
 //constructor
-Dijkstra::Dijkstra(int v,float per_of_con,int s,int d){
+Graph::Graph(int v,float per_of_con){
     this->vertex = v;//no. of node initialize
     this->connect_per = per_of_con;//connection percentage
-    this->source = s;//source initialize
-    this->destination = d;//destination initialize
+    node_array = new node[vertex];//create label array
+
     this->matrix = new int*[vertex];
-    this->connected = 0;
+    edge = new Edge[100];
+    no_of_edge=0;
 
     for(int i=0;i<vertex;i++){
         this->matrix[i] = new int[vertex];//create 2d matrix
@@ -26,7 +26,7 @@ Dijkstra::Dijkstra(int v,float per_of_con,int s,int d){
     initialize_node();
 }
 //private function
-void Dijkstra::initialize_matrix(){
+void Graph::initialize_matrix(){
     //srand(time(0));
     int x,y;
     int node = no_of_connection();//number of node connected
@@ -55,39 +55,31 @@ void Dijkstra::initialize_matrix(){
         }
     }
 }
-void Dijkstra::initialize_node(){
-    this->node_array = new node[vertex];//creating label array
+void Graph::initialize_node(){
     for(int i=0;i<vertex;i++){
-        node_array[i].setId(i);//setting an id for the node
+        node_array[i].setId(i);
     }
 }
+
 //calculate the number of connection for the given percentage
-int Dijkstra::no_of_connection(){
+int Graph::no_of_connection(){
     float percent = connect_per/100;
     int node = (vertex*(vertex-1))/2;// n(n-1)/2 formula for fully connected graph
     return node*percent;
 }
-
-
-void Dijkstra::setConnected(int c){
-    connected = c;
-}
-bool Dijkstra::isConnected(){
-    return connected;
-}
-void Dijkstra::relaxEdge(int u,int v,PriorityQueue &pq){
+void Graph::relaxEdge(int u,int v,PriorityQueue &pq){
     int parent_cost = node_array[u].getCost();
     int child_cost = node_array[v].getCost();
     int parent_to_child_cost = matrix[u][v];
 
     if(node_array[v].getCost()==-1){
-        node_array[v].setCost(parent_cost+parent_to_child_cost);
+        node_array[v].setCost(parent_to_child_cost);
         node_array[v].setPredecessor(u);
         pq.push(node_array[v]);
     }else{
         if(child_cost>parent_cost+parent_to_child_cost){
             pq.removeElement(node_array[v]);
-            node_array[v].setCost(parent_cost+parent_to_child_cost);
+            node_array[v].setCost(parent_to_child_cost);
             node_array[v].setPredecessor(u);
             pq.push(node_array[v]);
             //pq.display();
@@ -96,21 +88,16 @@ void Dijkstra::relaxEdge(int u,int v,PriorityQueue &pq){
     }
 
 }
-
-//public function
-void Dijkstra::dijkstraPath(){
-    int temp = source;
+void Graph::makeMst(){
+    int temp=0;
     PriorityQueue pq;
+    int u,v,weight;
     node_array[temp].setCost(0);
     node_array[temp].setPredecessor(0);
     node_array[temp].setId(0);
     node_array[temp].setVisited(true);
     pq.push(node_array[temp]);
-
     while(!pq.isEmpty()){
-        if(temp==destination){
-            setConnected(1);
-        }
         for(int j=0;j<vertex;j++){
             if(matrix[temp][j]!=-1 && matrix[temp][j]!=0){
                 if(!node_array[j].isVisited()){
@@ -119,37 +106,28 @@ void Dijkstra::dijkstraPath(){
             }
         }
         //pq.display();
+        u = pq.peek().getPredecessor();
+        v = pq.peek().getId();
+        weight = pq.peek().getCost();
+        edge[no_of_edge].setEdge(u,v,weight);
+        no_of_edge++;
         pq.pop();
-        temp = pq.peek().getId();
         //pq.display();
+        temp = pq.peek().getId();
         node_array[temp].setVisited(true);
     }
 }
-void Dijkstra::showPath(){
-    if(isConnected()){
-        stack<int>path;
-        int temp = destination;
-        cout<<"Path cost: "<<node_array[temp].getCost()<<endl;
-        while(temp!=source){
-            path.push(temp);
-            temp = node_array[temp].getPredecessor();
+bool Graph::inMstSet(int index){
+    for(int i=0;i<vertex;i++){
+        if(mstSet[i]==index){
+            return true;
         }
-        cout<<"Path display: ";
-        path.push(temp);
-        while(!path.empty()){
-            if(path.top()==destination){
-                cout<<path.top();
-            }else{
-                cout<<path.top()<<"->";
-            }
-            path.pop();
-        }
-        cout<<endl;
-    }else{
-        cout<<"There is no path from source to destination"<<endl;
     }
+    return false;
 }
-void Dijkstra::display_matrix(){
+
+void Graph::display_matrix(){
+    cout<<"Sample Graph"<<endl;
     for(int i=0;i<vertex;i++){
         for(int j=0;j<vertex;j++){
             cout<<setw(3)<<matrix[i][j]<<" ";
@@ -158,13 +136,10 @@ void Dijkstra::display_matrix(){
     }
     cout<<endl;
 }
-
-void Dijkstra::display_node(){
-    for(int i=0;i<vertex;i++){
-        cout<<"Node cost "<<node_array[i].getCost();
-        cout<<",Node ID "<<node_array[i].getId();
-        cout<<",Node predecessor "<<node_array[i].getPredecessor();
-        cout<<",Node status "<<node_array[i].isVisited()<<endl;
+void Graph::displayMST(){
+    cout<<"Minimum spanning tree"<<endl;
+    cout<<"Edge"<<"  "<<"weight"<<endl;
+    for(int i=1;i<no_of_edge;i++){
+        edge[i].displayTree();
     }
-
 }

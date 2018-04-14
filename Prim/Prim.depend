@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1523351055 source:/home/mirsahib/Desktop/Project_Mercury/Prim/Graph.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	"Edge.h"
+	"PriorityQueue.h"
+	"node.h"
+	"Graph.h"
+
+1523205550 /home/mirsahib/Desktop/Project_Mercury/Prim/Graph.h
+	"PriorityQueue.h"
+	"Edge.h"
+	"node.h"
+
+1523350951 source:/home/mirsahib/Desktop/Project_Mercury/Prim/main.cpp
+	<iostream>
+	"Graph.h"
+	"Edge.h"
+
+1523205998 source:/home/mirsahib/Desktop/Project_Mercury/Prim/Edge.cpp
+	<iostream>
+	"Edge.h"
+
+1523206002 /home/mirsahib/Desktop/Project_Mercury/Prim/Edge.h
+
+1523020128 /home/mirsahib/Desktop/Project_Mercury/Prim/node.h
+
+1523166493 /home/mirsahib/Desktop/Project_Mercury/Prim/PriorityQueue.h
+	"node.h"
+
+1523020131 source:/home/mirsahib/Desktop/Project_Mercury/Prim/node.cpp
+	<iostream>
+	"node.h"
+
+1523195006 source:/home/mirsahib/Desktop/Project_Mercury/Prim/PriorityQueue.cpp
+	<iostream>
+	"PriorityQueue.h"
+	"node.h"
+

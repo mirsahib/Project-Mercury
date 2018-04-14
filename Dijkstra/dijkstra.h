@@ -1,6 +1,7 @@
 #ifndef _Dijkstra_H
 #define _Dijkstra
-#include <queue>
+#include <vector>
+#include "PriorityQueue.h"
 #include "node.h"
 
 using namespace std;
@@ -18,8 +19,8 @@ private:
     void setConnected(int c);
     void initialize_matrix();
     void initialize_node();
+    void relaxEdge(int u,int v,PriorityQueue &pq);
     int no_of_connection();
-    void relax_edge(int u,int v,priority_queue<node,vector<node>,comparable>& pq);//relax_edge(source,destination)
     bool isConnected();
 
 public:

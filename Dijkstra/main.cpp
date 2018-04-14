@@ -12,7 +12,7 @@
 using namespace std;
 
 int main(){
-    Dijkstra d(6,50,5,2);
+    Dijkstra d(6,50,0,2);
     d.display_matrix();
     d.dijkstraPath();
     //d.display_node();
