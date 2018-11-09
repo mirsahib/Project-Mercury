@@ -1,0 +1,12 @@
+
+public class Node<T> {
+	T data;
+	Node left;
+	Node right;
+	
+	Node(T item){
+		data = item;
+		left = null;
+		right = null;
+	}
+}

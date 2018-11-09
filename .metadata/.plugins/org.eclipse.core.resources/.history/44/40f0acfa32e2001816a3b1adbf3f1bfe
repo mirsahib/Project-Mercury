@@ -1,0 +1,13 @@
+
+public class Node {
+	int freq;
+	char word;
+	Node left;
+	Node right;
+	Node(int f,char wd){
+		freq = f;
+		word = wd;
+		left = null;
+		right = null;
+	}
+}

@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+
+
+public class Huffman {
+	public class Node{
+		char wd;
+		int counter;
+	}
+	
+	public static void main(String[] args) {
+		//String fileName = "text.txt";
+		//HuffmanEncoder encode = new HuffmanEncoder(fileName);
+		String l = "aabbbccccdee";
+		frequency(l);
+	}
+	private static void frequency(String line){
+		ArrayList<Node> charList = new ArrayList<Node>();
+		for(int i=0;i<line.length();i++){
+			char c = line.charAt(i);
+			if(inList(c,charList)){
+				
+			}
+			
+			
+		}
+	}
+	@SuppressWarnings("unused")
+	private static boolean inList(char c,ArrayList<Node> list){
+		boolean counter=false;
+		for(int i=0;i<list.size();i++){
+			if(c == list.get(i).wd){
+				counter=true;
+				break;
+			}
+		}
+		return counter;
+	}
+	private static void updateCounter(char c,ArrayList<Node>list){
+		for(int i=0;i<list.size();i++){
+			if(c == list.get(i).wd){
+				list.get(i).counter++;
+			}
+		}
+		
+	}
+
+}

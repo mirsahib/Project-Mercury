@@ -1,0 +1,17 @@
+
+public class Node {
+	int freq;
+	char word;
+	Node left;
+	Node right;
+	Node(char wd){
+		freq = 1;
+		word = wd;
+		left = null;
+		right = null;
+	}
+	public String toString(){
+		String s = "Word "+this.word+" Freq "+this.freq;
+		return s;
+	}
+}

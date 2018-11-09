@@ -1,0 +1,36 @@
+
+public class BinarySearchTree<T extends Comparable<T>> {
+	private Node root;
+	
+	BinarySearchTree() {
+		root = null;
+	}
+	
+	private Node insertElement(Node<T> root,T element){
+		if(root == null){
+			root = new Node(element);
+			return root;
+		}
+		if(root.data.compareTo(element)>0){
+			root.left = insertElement(root.left,element);
+		}else if(root.data.compareTo(element)<0){
+			root.right = insertElement(root.right,element);
+		}
+		return root; 
+	}
+	private void printElement(Node<T> root){
+		if(root.left!=null){
+			printElement(root.left);
+		}
+		System.out.print(root.data+" ");
+		if(root.right!=null){
+			printElement(root.right);
+		}
+	}
+	public void insert(T item){
+		root = insertElement(root,item);
+	}
+	public void print(){
+		printElement(root);
+	}
+}

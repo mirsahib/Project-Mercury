@@ -1,0 +1,23 @@
+
+public class Node implements Comparable<Node> {
+	int freq;
+	char word;
+	Node left;
+	Node right;
+	Node(char wd){
+		freq = 1;
+		word = wd;
+		left = null;
+		right = null;
+	}
+	
+	public int compareTo(Node arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String toString(){
+		String s = "Word "+this.word+" Freq "+this.freq;
+		return s;
+	}
+}
