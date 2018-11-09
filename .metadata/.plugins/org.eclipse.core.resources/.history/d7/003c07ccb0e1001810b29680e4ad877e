@@ -1,0 +1,9 @@
+
+public class BinarySearchTree {
+	private Node root;
+	
+	
+	BinarySearchTree() {
+		root = null;
+	}
+}

@@ -1,0 +1,10 @@
+
+public class Tree {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		BinarySearchTree myTree = BinarySearchTree();
+		System.out.println("hellow");
+	}
+
+}

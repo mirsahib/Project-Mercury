@@ -1,0 +1,25 @@
+
+
+public class Huffman {
+	public static class Node{
+		char wd;
+		int counter;
+		Node(char c){
+			wd = c;
+			counter=1;
+		}
+		public String toString(){
+			String s="Character: "+this.wd+"\nFrequency: "+this.counter;
+			return s;
+		}
+	}
+	
+	public static void main(String[] args) {
+		//String fileName = "text.txt";
+		//HuffmanEncoder encode = new HuffmanEncoder(fileName);
+		//encode.printCharList();
+		
+	}
+	
+	
+}

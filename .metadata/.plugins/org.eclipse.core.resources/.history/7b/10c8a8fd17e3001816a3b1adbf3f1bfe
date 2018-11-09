@@ -1,0 +1,94 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+
+public class HuffmanEncoder {
+	private String line;
+	private ArrayList<Node>charList;
+	private PriorityQueue<Node>pq;
+	private Node root;
+	
+	HuffmanEncoder(String file){
+		File fn = new File(file);
+		try {
+			@SuppressWarnings("resource")
+			Scanner sc = new Scanner(fn);
+			while(sc.hasNextLine()){
+				line = sc.nextLine();
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		charList = new ArrayList<Node>();
+		findFrequency();
+		fillQueue();
+		//createHuffmanTree();
+	}
+	private void fillQueue(){
+		this.pq = new PriorityQueue<Node>();
+		for(int i=0;i<charList.size();i++){
+			Node temp = charList.get(i);
+			this.pq.add(temp);
+		}
+	}
+	private void createHuffmanTree(){
+		while(pq.size()>1){
+			Node temp1 = pq.remove();
+			Node temp2 = pq.remove();
+			Node sum = new Node();
+			sum.freq = temp1.freq+temp2.freq;
+			sum.word = temp1.word+""+temp2.word;
+			sum.left = temp1;
+			sum.right = temp2;
+			pq.add(sum);
+		}
+		root = pq.remove();
+	}
+	private void findFrequency(){
+		for(int i=0;i<line.length();i++){
+			char c = line.charAt(i);
+			if(!inLine(c)){
+				Node temp = new Node(c);
+				charList.add(temp);
+			}
+		}
+	};
+	private boolean inLine(char c){
+		boolean flag = false;
+		for(int i=0;i<charList.size();i++){
+			String x = Character.toString(c);
+			if(x.equals(charList.get(i).word)){
+				charList.get(i).freq++;
+				flag = true;
+			}
+		}
+		return flag;
+	}
+	//public function
+	public void printCharList(){
+		for(int i=0;i<charList.size();i++){
+			System.out.println(charList.get(i));
+		}
+	}
+	public void printQueue(){
+		while(!this.pq.isEmpty()){
+			System.out.println(this.pq.remove());
+		}
+	}
+	private void printTree(Node root){
+		if(root.left!=null){
+			printTree(root.left);
+		}
+		System.out.println(root);
+		if(root.right!=null){
+			printTree(root.right);
+		}
+	}
+	public void printTree(){
+		printTree(root);
+	}
+}

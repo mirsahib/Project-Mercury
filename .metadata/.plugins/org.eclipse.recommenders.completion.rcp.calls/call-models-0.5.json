@@ -1,0 +1,17 @@
+{
+  "/home/mirsahib/workspace/Tree/src": {
+    "location": "/home/mirsahib/workspace/Tree/src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027/home/mirsahib/workspace/Tree/src\u0027. Skipped."
+  },
+  "/usr/lib/jvm/java-7-openjdk-i386/jre/lib/rt.jar": {
+    "location": "/usr/lib/jvm/java-7-openjdk-i386/jre/lib/rt.jar",
+    "status": "UNRESOLVED",
+    "error": "Could not transfer artifact jre:jre:zip:call:1.0.0 from/to remote-models (http://download.eclipse.org/recommenders/models/kepler/): Error transferring file, server returned status code 307"
+  },
+  "/home/mirsahib/workspace/Huffman/src": {
+    "location": "/home/mirsahib/workspace/Huffman/src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027/home/mirsahib/workspace/Huffman/src\u0027. Skipped."
+  }
+}
