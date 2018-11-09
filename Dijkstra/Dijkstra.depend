@@ -1,0 +1,57 @@
+# depslib dependency file v1.0
+1521362437 source:/home/mirsahib/Desktop/Dijkstra/main.cpp
+	<iostream>
+	<dijkstra.h>
+
+1521362546 source:/home/mirsahib/Desktop/Dijkstra/dijkstra.cpp
+	<iostream>
+	<cmath>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	"node.h"
+	"dijkstra.h"
+
+1521362327 /home/mirsahib/Desktop/Dijkstra/dijkstra.h
+	"node.h"
+
+1521362257 source:/home/mirsahib/Desktop/Dijkstra/node.cpp
+	<iostream>
+	"node.h"
+
+1521362092 /home/mirsahib/Desktop/Dijkstra/node.h
+
+1523169197 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/main.cpp
+	<iostream>
+	<dijkstra.h>
+
+1523020131 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/node.cpp
+	<iostream>
+	"node.h"
+
+1523020128 /home/mirsahib/Desktop/Project_Mercury/Dijkstra/node.h
+
+1523169804 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/dijkstra.cpp
+	<iostream>
+	<cmath>
+	<cstdlib>
+	<ctime>
+	<iomanip>
+	<stack>
+	"PriorityQueue.h"
+	"node.h"
+	"dijkstra.h"
+
+1523163235 /home/mirsahib/Desktop/Project_Mercury/Dijkstra/dijkstra.h
+	<vector>
+	"PriorityQueue.h"
+	"node.h"
+
+1523168137 source:/home/mirsahib/Desktop/Project_Mercury/Dijkstra/PriorityQueue.cpp
+	<iostream>
+	"PriorityQueue.h"
+	"node.h"
+
+1523166493 /home/mirsahib/Desktop/Project_Mercury/Dijkstra/PriorityQueue.h
+	"node.h"
+
