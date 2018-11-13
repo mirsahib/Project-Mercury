@@ -4,4 +4,5 @@ I have done the following project in my Algorithm course(IUB CSE 306)
 * Dijkstra- shortest non negative path algorithm
 * Prim - Minimum spanning tree
 * Cycle detection - Detect a cycle within a graph (this is done using DFS)
-* String Evalution - It a calculator which evaluate the result following the BODMAS rule ()
+* String Evalution - It a calculator which evaluate the result following the BODMAS rule 
+* Huffman (not included as an assignment)
